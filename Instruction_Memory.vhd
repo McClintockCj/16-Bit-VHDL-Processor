@@ -8,7 +8,7 @@ entity Instruction_Memory is
 end entity;
 
 architecture behavioral of Instruction_Memory is
-type IM is array (0 to 32) of std_logic_vector(15 downto 0);
+type IM is array (0 to 31) of std_logic_vector(15 downto 0);
 Signal Memory : IM := (others => x"0000");
 begin
 
