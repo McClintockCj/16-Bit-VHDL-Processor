@@ -12,7 +12,7 @@ entity Data_Memory is
 end entity;
 
 architecture behavioral of Data_Memory is
-Type storage is array (0 to 32) of std_logic_vector(15 downto 0); --Create memory type
+Type storage is array (0 to 31) of std_logic_vector(15 downto 0); --Create memory type
 Signal Memory : storage := (others => x"0000");
 begin
 

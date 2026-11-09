@@ -9,9 +9,9 @@ end entity;
 
 architecture structural of CPU is
 --PC
-Signal PCP1 : std_logic_vector(4 downto 0); --Program Counter Plus 1
-Signal PC_Curr : std_logic_vector(4 downto 0); --Current PC value
-Signal PC_In : std_logic_vector(4 downto 0); -- Bus into PC 
+Signal PCP1 : std_logic_vector(4 downto 0) := "00000"; --Program Counter Plus 1
+Signal PC_Curr : std_logic_vector(4 downto 0) := "00000"; --Current PC value
+Signal PC_In : std_logic_vector(4 downto 0) := "00000"; -- Bus into PC 
 
 --Instruction Memory
 Signal Inst_out : std_logic_vector(15 downto 0);
@@ -22,10 +22,11 @@ Signal WriteData : std_logic_vector(15 downto 0);
 Signal RegWr : std_logic;
 Signal BusA : std_logic_vector(15 downto 0);
 Signal BusB : std_logic_vector(15 downto 0);
+Signal WriteInbetween : std_logic_vector(3 downto 0);
 
 --ALU
 Signal ALUCtr : std_logic_vector(2 downto 0);
-Signal Zero : std_logic;
+Signal Zero_sig : std_logic;
 Signal Result : std_logic_vector(15 downto 0);
 Signal OpB : std_logic_vector(15 downto 0);
 Signal ALUSel : std_logic;
@@ -40,8 +41,9 @@ Signal Immediate : std_logic_vector(15 downto 0);
 Signal ImmediateBr : std_logic_vector(4 downto 0);
 Signal PCCtr : std_logic;
 Signal PC_INT : std_logic_vector(4 downto 0);
-Signal bz_sel : std_logic;
-Signal BZ, BNZ : std_logic;
+Signal bz_sel : std_logic := '0';
+Signal BZ_sig : std_logic := '0';
+Signal BNZ_sig : std_logic := '0';
 Signal WrSrc : std_logic;
 Signal Mem2Reg : std_logic;
 Signal DataInter : std_logic_vector(15 downto 0);
@@ -50,23 +52,25 @@ Signal LiSig : std_logic;
 begin
 
 --Sign extend the immediate MAKE THIS A PROCESS
-SignEx : process(Inst_Out(15 downto 12)) is
+SignEx : process(Inst_Out) is
 begin
-    if (Inst_Out(15 downto 12) = "1101" or Inst_Out(15 downto 12) = "1101" or Inst_Out(15 downto 12) = "1110") then
+    if (Inst_Out(15 downto 12) = "1011" or Inst_Out(15 downto 12) = "1101" or Inst_Out(15 downto 12) = "1110") then
         Immediate <= std_logic_vector(resize(unsigned(Inst_out(7 downto 0)), 16)); --LI or BZ/BNZ
-        ImmediateBr <= std_logic_vector(resize(unsigned(Inst_out(7 downto 0)), 5)); --LI or BZ/BNZ
+        ImmediateBr <= Inst_out(4 downto 0); --LI or BZ/BNZ
     elsif (Inst_Out(15 downto 12) = "1111") then
         Immediate <= std_logic_vector(resize(unsigned(Inst_out(11 downto 0)), 16)); --J
+        ImmediateBr <= Inst_out(4 downto 0); --LI or BZ/BNZ
     else 
         Immediate <= std_logic_vector(resize(unsigned(Inst_out(3 downto 0)), 16)); --Any other I type instruction
+        ImmediateBr <= Inst_out(4 downto 0); --LI or BZ/BNZ
     end if;
 end process;
 
 
 --Instantiate Program Counter
  PC : entity work.Program_Counter(behavioral)
-    port map(CLK => clk, PC_Next => PCP1, PC => PC_Curr,
-             Next_PC => PC_IN);
+    port map(CLK => clk, PC_Next => PCP1, PC_OUT => PC_Curr,
+             PC_IN => PC_IN);
 
 --Instantiate Instruction Memory
 Inst_Memory : entity work.Instruction_Memory(behavioral)
@@ -81,7 +85,7 @@ File_Registers : entity work.Register_File(Behavioral)
 --Instantiate ALU
 CPU_ALU : entity work.ALU_FUNCT(behavioral)
     port map(ALUCtr => ALUCtr, BusA => BusA, BusB => OpB, 
-             Result => Result, Zero => Zero);
+             Result => Result, Zero => Zero_sig);
              
 --Instantiate Data Memory
 Data_Mem : entity work.Data_Memory(Behavioral)
@@ -94,17 +98,18 @@ Control : entity work.Control_Unit(Behavioral)
     port map(OpCode => Inst_Out(15 downto 12), WrSrc => WrSrc,
              ALUCtr => ALUSel, MemToReg => Mem2Reg, 
              RegWr => RegWr, MemRead => MemRead,
-             MemWr => MemWr, BZ => BZ, BNZ => BNZ,
+             MemWr => MemWr, BZ => BZ_sig, BNZ => BNZ_sig,
              LiSig => LISIG, PCCtr => PCCtr, ALUOp => ALUCtr);
 
 --PC Multiplexers
 PC1 : entity work.mux5(Behavioral)
     port map(in1 => pcp1, in2 => ImmediateBr, sel => PCCtr,
              Out1 => PC_INT);
-
-process(BNZ, BZ, ZERO) is
-    begin
-    BZ_Sel <= (BNZ AND NOT ZERO) or (BZ AND ZERO);
+             
+--Assign BZ_Sel based on combinational logic
+process(BNZ_sig, BZ_sig, ZERO_Sig) is
+begin
+    BZ_Sel <= (BNZ_SIG AND NOT ZERO_SIG) OR (BZ_SIG AND ZERO_SIG);
 end process;
 
 PC2 : entity work.mux5(Behavioral)
@@ -114,7 +119,10 @@ PC2 : entity work.mux5(Behavioral)
 --Reg File Multiplexer
 Reg1 : entity work.mux4(Behavioral)
     port map(in1 => Inst_Out(3 downto 0), in2 => Inst_Out(7 downto 4),
-             Sel => WrSrc, Out1 => WriteSource);
+             Sel => WrSrc, Out1 => WriteInbetween);
+Reg2 : entity work.mux4(Behavioral)
+    port map(in1 => WriteInbetween, in2 => Inst_Out(11 downto 8),
+             Sel => LiSig, Out1 => WriteSource);
 
 --ALU Source Multiplexer
 Alu1 : entity work.mux16(Behavioral)

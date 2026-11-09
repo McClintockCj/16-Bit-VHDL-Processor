@@ -22,7 +22,19 @@ begin
 
     Control : process(OpCode) is
     begin
-        LiSig <= '0';
+        WrSrc    <= '0';
+        ALUCtr   <= '0';
+        MemToReg <= '0';
+        RegWr    <= '0';
+        MemRead  <= '0';
+        MemWr    <= '0';
+        LiSig    <= '0';
+        BZ       <= '0';
+        BNZ      <= '0';
+        Branch   <= '0';
+        PCCtr    <= '0';
+        ALUOp    <= "000";
+        
         case opcode is 
             when "0000" => --ADD
                 WrSrc <= '0';
@@ -139,7 +151,7 @@ begin
                 ALUCtr <= '1';
                 MemToReg <= '0';
                 RegWr <= '1';
-                MemRead <= '1';
+                MemRead <= '0';
                 MemWr <= '0';
                 Branch <= '0';
                 PCCtr <= '0';
@@ -188,6 +200,16 @@ begin
                 MemWr <= '0';
                 Branch <= '0';
                 PCCtr <= '1';
+                ALUOp <= "000";
+            When Others =>
+                WrSrc <= '0';
+                ALUCtr <= '0';
+                MemToReg <= '0';
+                RegWr <= '0';
+                MemRead <= '0';
+                MemWr <= '0';
+                Branch <= '0';
+                PCCtr <= '0';
                 ALUOp <= "000";
                 
        end case;

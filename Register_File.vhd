@@ -16,7 +16,7 @@ end entity;
 
 architecture behavioral of register_file is
 type reg_file is array (0 to 15) of std_logic_vector(15 downto 0);
-Signal Registers : reg_file := (others => x"0000");
+Signal Registers : reg_file := (x"0003", x"0005", others => x"0000");
 begin
 
     write_data : Process(clk) is --On rising clock edge, if write enable is true
