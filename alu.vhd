@@ -28,7 +28,7 @@ begin
             when "000" =>
                 Result_sig <= std_logic_vector(unsigned(BusA) + unsigned(BusB));
                 
-            when "001" | "111" =>
+            when "001" =>
                 Result_sig <= std_logic_vector(unsigned(BusA) - unsigned(BusB));
                 
             when "010" =>
@@ -45,6 +45,13 @@ begin
                 
             when "110" =>
                 Result_sig <= std_logic_vector(shift_right(unsigned(BusA), shamt));
+            
+            when "111" =>
+                if (unsigned(busA) < unsigned(busB)) then
+                    Result_sig <= x"0001";
+                else 
+                    Result_sig <= x"0000";
+                end if;
                 
             when others =>
                 Result_sig <= (others => '0');
