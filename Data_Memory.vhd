@@ -13,20 +13,20 @@ end entity;
 
 architecture behavioral of Data_Memory is
 Type storage is array (0 to 31) of std_logic_vector(15 downto 0); --Create memory type
-Signal Memory : storage := (others => x"0000");
+Signal Data_Memory : storage := (others => x"0000");
 begin
 
     Write : process(clk) is
     begin
         if (rising_edge(clk) AND MemWrite = '1') then --Write enable high and rising edge
-            Memory(to_integer(unsigned(addressIn))) <= WriteData; --Write to memory
+            Data_Memory(to_integer(unsigned(addressIn))) <= WriteData; --Write to memory
         end if;
     end process write;
     
-    Read : process(addressIn, Memory) is
+    Read : process(addressIn, Data_Memory) is
     begin
         if (MemRead = '1') then --If memread high
-            DataOut <= Memory(to_integer(unsigned(AddressIn))); --Read out data
+            DataOut <= Data_Memory(to_integer(unsigned(AddressIn))); --Read out data
         end if;
     end process read;
 end architecture behavioral;
