@@ -25,7 +25,7 @@ Signal BusB : std_logic_vector(15 downto 0);
 Signal WriteInbetween : std_logic_vector(3 downto 0);
 
 --ALU
-Signal ALUCtr : std_logic_vector(2 downto 0);
+Signal ALUCtr : std_logic_vector(3 downto 0);
 Signal Zero_sig : std_logic;
 Signal Result : std_logic_vector(15 downto 0);
 Signal OpB : std_logic_vector(15 downto 0);
@@ -84,7 +84,7 @@ File_Registers : entity work.Register_File(Behavioral)
              
 --Instantiate ALU
 CPU_ALU : entity work.ALU_FUNCT(behavioral)
-    port map(ALUCtr => ALUCtr, BusA => BusA, BusB => OpB, 
+    port map(ALUCtr => ALUCtr, in1 => BusA, in2 => OpB, 
              Result => Result, Zero => Zero_sig);
              
 --Instantiate Data Memory
@@ -109,7 +109,13 @@ PC1 : entity work.mux5(Behavioral)
 --Assign BZ_Sel based on combinational logic
 process(BNZ_sig, BZ_sig, ZERO_Sig) is
 begin
-    BZ_Sel <= (BNZ_SIG AND NOT ZERO_SIG) OR (BZ_SIG AND ZERO_SIG);
+    if (BNZ_sig = '1' AND ZERO_Sig = '0') then
+        BZ_Sel <= '1';
+    elsif (BZ_sig = '1' AND ZERO_Sig = '1') then
+        BZ_Sel <= '1';
+    else
+        BZ_Sel <= '0';
+    end if;
 end process;
 
 PC2 : entity work.mux5(Behavioral)
