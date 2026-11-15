@@ -1,3 +1,5 @@
+--Register_File
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -19,8 +21,8 @@ type reg_file is array (0 to 15) of std_logic_vector(15 downto 0);
 Signal Registers : reg_file := (others => x"0000");
 begin
 
-    write_data : Process(clk) is --On rising clock edge, if write enable is true
-    begin --                     Write data in to the corresponding register
+    write_data : Process(clk) is --On rising clock edge, if write enable is true then
+    begin                        --write DataIn to the corresponding register
         if (rising_edge(clk) AND EN = '1') then
             Registers(to_integer(unsigned(WriteD))) <= DataIn;
         end if;

@@ -1,3 +1,5 @@
+--Control_Unit
+
 Library IEEE;
 use IEEE.std_logic_1164.ALL;
 

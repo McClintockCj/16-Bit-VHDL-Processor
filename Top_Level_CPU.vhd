@@ -1,10 +1,19 @@
+--Top_Level_CPU
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 Entity CPU is
 --Empty Architecture?
-    port(clk : std_logic);
+    port(clk : in std_logic;
+         PC_Debug      : out std_logic_vector(4 downto 0);
+         Inst_Debug    : out std_logic_vector(15 downto 0);
+         Result_Debug  : out std_logic_vector(15 downto 0);
+         WData_Debug   : out std_logic_vector(15 downto 0);
+         RegWr_Debug   : out std_logic;
+         MemWr_Debug   : out std_logic
+    );
 end entity;
 
 architecture structural of CPU is
@@ -50,6 +59,13 @@ Signal DataInter : std_logic_vector(15 downto 0);
 Signal LiSig : std_logic;
 
 begin
+
+    PC_Debug     <= PC_Curr;
+    Inst_Debug   <= Inst_out;
+    Result_Debug <= Result;
+    WData_Debug  <= WriteData;
+    RegWr_Debug  <= RegWr;
+    MemWr_Debug  <= Memwr;
 
 --Sign extend the immediate MAKE THIS A PROCESS
 SignEx : process(Inst_Out) is
