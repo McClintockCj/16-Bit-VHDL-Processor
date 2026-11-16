@@ -14,7 +14,6 @@ Entity Control_Unit is
          BZ : out std_logic;
          BNZ : out std_logic;
          LiSig : out std_logic;
-         Branch : out std_logic;
          PCCtr : out std_logic;
          ALUOp : out std_logic_vector(3 downto 0));
 end entity;
@@ -33,7 +32,6 @@ begin
         LiSig    <= '0';
         BZ       <= '0';
         BNZ      <= '0';
-        Branch   <= '0';
         PCCtr    <= '0';
         ALUOp    <= "0000";
         
@@ -45,7 +43,6 @@ begin
                 RegWr <= '1';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "0000";
             when "0001" => --SUB
@@ -55,7 +52,6 @@ begin
                 RegWr <= '1';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "0001";
             when "0010" => --AND
@@ -65,7 +61,6 @@ begin
                 RegWr <= '1';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "0010";
             when "0011" => --OR
@@ -75,7 +70,6 @@ begin
                 RegWr <= '1';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "0011";
             when "0100" => --ADDI
@@ -85,7 +79,6 @@ begin
                 RegWr <= '1';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "0000";
             when "0101" => --XOR
@@ -95,7 +88,6 @@ begin
                 RegWr <= '1';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "0100";
             when "0110" => --SLT
@@ -105,7 +97,6 @@ begin
                 RegWr <= '1';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "0111";
             when "0111" => --SLTI
@@ -115,7 +106,6 @@ begin
                 RegWr <= '1';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "0111";
             when "1000" => --SLLI
@@ -125,7 +115,6 @@ begin
                 RegWr <= '1';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "0101";
             when "1001" => --SLRI
@@ -135,7 +124,6 @@ begin
                 RegWr <= '1';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "0110";
             when "1010" => --LW
@@ -145,7 +133,6 @@ begin
                 RegWr <= '1';
                 MemRead <= '1';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "0000";
             when "1011" => --LI has its own signal for a specific multiplex
@@ -155,7 +142,6 @@ begin
                 RegWr <= '1';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 LiSig <= '1';
                 ALUOp <= "0000";
@@ -166,7 +152,6 @@ begin
                 RegWr <= '0';
                 MemRead <= '0';
                 MemWr <= '1';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "0000";
             when "1101" => --BZ 
@@ -178,7 +163,6 @@ begin
                 RegWr <= '0';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "1000";
             when "1110" => --BNZ 
@@ -190,7 +174,6 @@ begin
                 RegWr <= '0';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "1000";
             when "1111" => --J 
@@ -200,7 +183,6 @@ begin
                 RegWr <= '0';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '1';
                 ALUOp <= "0000";
             When Others =>
@@ -210,7 +192,6 @@ begin
                 RegWr <= '0';
                 MemRead <= '0';
                 MemWr <= '0';
-                Branch <= '0';
                 PCCtr <= '0';
                 ALUOp <= "0000";
                 
