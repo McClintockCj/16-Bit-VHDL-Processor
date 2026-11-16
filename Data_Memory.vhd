@@ -27,7 +27,7 @@ begin
 
     Write : process(clk) is
     begin
-        if (rising_edge(clk) AND MemWrite = '1') then --Write enable high and rising edge
+        if (falling_edge(clk) AND MemWrite = '1') then --Write enable high and rising edge
             if (to_integer(unsigned(addressIn)) <= 31) then
                 Data_Memory(to_integer(unsigned(addressIn))) <= WriteData; --Write to memory
             end if;

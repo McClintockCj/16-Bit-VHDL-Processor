@@ -6,7 +6,7 @@ entity CPU_tb is
 end entity;
 
 architecture sim of CPU_tb is
-    signal clk          : std_logic := '0';
+    signal clk          : std_logic := '1';
     signal PC_Debug     : std_logic_vector(4 downto 0);
     signal Inst_Debug   : std_logic_vector(15 downto 0);
     signal Result_Debug : std_logic_vector(15 downto 0);
@@ -33,9 +33,9 @@ begin
     clk_process : process
     begin
         while not sim_done loop
-            clk <= '0';
-            wait for CLK_PERIOD / 2;
             clk <= '1';
+            wait for CLK_PERIOD / 2;
+            clk <= '0';
             wait for CLK_PERIOD / 2;
         end loop;
         wait;

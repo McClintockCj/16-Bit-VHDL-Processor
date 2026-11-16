@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="CPU_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="CPU_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="221.711 ns"></ZoomEndTime>
+      <Cursor1Time time="825.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="224"></NameColumnWidth>
+      <ValueColumnWidth column_width="90"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="24" />
+   <wvobject fp_name="/CPU_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/PC_Debug" type="array">
+      <obj_property name="ElementShortName">PC_Debug[4:0]</obj_property>
+      <obj_property name="ObjectShortName">PC_Debug[4:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">UNSIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">0</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/Inst_Debug" type="array">
+      <obj_property name="ElementShortName">Inst_Debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">Inst_Debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/Result_Debug" type="array">
+      <obj_property name="ElementShortName">Result_Debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">Result_Debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/WData_Debug" type="array">
+      <obj_property name="ElementShortName">WData_Debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">WData_Debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/RegWr_Debug" type="logic">
+      <obj_property name="ElementShortName">RegWr_Debug</obj_property>
+      <obj_property name="ObjectShortName">RegWr_Debug</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/MemWr_Debug" type="logic">
+      <obj_property name="ElementShortName">MemWr_Debug</obj_property>
+      <obj_property name="ObjectShortName">MemWr_Debug</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/sim_done" type="other">
+      <obj_property name="ElementShortName">sim_done</obj_property>
+      <obj_property name="ObjectShortName">sim_done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/File_Registers/Read1" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">Read1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Read1[3:0]</obj_property>
+      <obj_property name="label">Rs</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/File_Registers/Read2" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">Read2[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Read2[3:0]</obj_property>
+      <obj_property name="label">Rt</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/File_Registers/WriteD" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">WriteD[3:0]</obj_property>
+      <obj_property name="ObjectShortName">WriteD[3:0]</obj_property>
+      <obj_property name="label">Rd</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/File_Registers/DataIn" type="array">
+      <obj_property name="ElementShortName">DataIn[15:0]</obj_property>
+      <obj_property name="ObjectShortName">DataIn[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/File_Registers/EN" type="logic">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">EN</obj_property>
+      <obj_property name="ObjectShortName">EN</obj_property>
+      <obj_property name="label">Write_En</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/File_Registers/CLK" type="logic">
+      <obj_property name="ElementShortName">CLK</obj_property>
+      <obj_property name="ObjectShortName">CLK</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/File_Registers/Out1" type="array">
+      <obj_property name="ElementShortName">Out1[15:0]</obj_property>
+      <obj_property name="ObjectShortName">Out1[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/File_Registers/Out2" type="array">
+      <obj_property name="ElementShortName">Out2[15:0]</obj_property>
+      <obj_property name="ObjectShortName">Out2[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/Data_Mem/addressIn" type="array">
+      <obj_property name="ElementShortName">addressIn[15:0]</obj_property>
+      <obj_property name="ObjectShortName">addressIn[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/Data_Mem/WriteData" type="array">
+      <obj_property name="ElementShortName">WriteData[15:0]</obj_property>
+      <obj_property name="ObjectShortName">WriteData[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/Data_Mem/CLK" type="logic">
+      <obj_property name="ElementShortName">CLK</obj_property>
+      <obj_property name="ObjectShortName">CLK</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/Data_Mem/MemRead" type="logic">
+      <obj_property name="ElementShortName">MemRead</obj_property>
+      <obj_property name="ObjectShortName">MemRead</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/Data_Mem/MemWrite" type="logic">
+      <obj_property name="ElementShortName">MemWrite</obj_property>
+      <obj_property name="ObjectShortName">MemWrite</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/Data_Mem/DataOut" type="array">
+      <obj_property name="ElementShortName">DataOut[15:0]</obj_property>
+      <obj_property name="ObjectShortName">DataOut[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/File_Registers/Registers" type="array">
+      <obj_property name="ElementShortName">Registers[0:15][15:0]</obj_property>
+      <obj_property name="ObjectShortName">Registers[0:15][15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CPU_tb/UUT/Data_Mem/Data_Memory" type="array">
+      <obj_property name="ElementShortName">Data_Memory[0:31][15:0]</obj_property>
+      <obj_property name="ObjectShortName">Data_Memory[0:31][15:0]</obj_property>
+   </wvobject>
+</wave_config>
